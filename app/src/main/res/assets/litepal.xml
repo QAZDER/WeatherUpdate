@@ -1,0 +1,10 @@
+<litepal>
+    <dbname value="weather_update"></dbname>
+    <version value="1"></version>
+
+    <list>
+        <mapping class="com.azder.weatherupdata.db.Province"/>
+        <mapping class="com.azder.weatherupdata.db.City"/>
+        <mapping class="com.azder.weatherupdata.db.County"/>
+    </list>
+</litepal>
