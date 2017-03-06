@@ -1,6 +1,9 @@
+
 # WeatherUpdate
-����android������Ԥ���������ɲ鿴ȫ�����ص�����������ṩ�ֶ����ºͺ�̨���µĹ��ܡ�
-�Ӻͷ������ṩ�����api��ȡȫ��������Ϣ��ʹ��litepal��Դ��洢������Ϣ��ͨ��listview��չʾ�����б���getposition��ȡѡ�г����Լ���Ӧ������weather_id��ʹ��okhttp��Դ����������������ͨ��gson��Դ����ʵ��json���ݵĽ�����
-ʹ��glide��Դ�����ÿ�ո��µ�ͼƬ��
-��������ˢ����ʵ���ֶ�����������ʹ��drawerlayout����ʾ�����б���Ƭ�����л����еĹ��ܡ�
-����������onStartCommand��ʵ���Զ����������Ĺ��ܡ�
+基于android的天气预报软件，可查看全国各地的天气情况，提供手动更新和后台更新的功能。
+从和风天气提供的免费api获取全国城市信息，使用litepal开源库存储城市信息，通过listview来展示城市列表，getposition获取选中城市以及对应地区的weather_id，使用okhttp开源库来发送网络请求，通过gson开源库来实现json数据的解析。
+使用glide开源库加载每日更新的图片。
+加入下拉刷新来实现手动更新天气，使用drawerlayout来显示城市列表碎片做到切换城市的功能。
+创建服务，在onStartCommand中实现自动更新天气的功能。
+
+参考：第二行代码 https://github.com/guolindev/coolweather
