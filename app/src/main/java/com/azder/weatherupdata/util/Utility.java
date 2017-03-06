@@ -1,10 +1,13 @@
 package com.azder.weatherupdata.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.azder.weatherupdata.db.City;
 import com.azder.weatherupdata.db.County;
 import com.azder.weatherupdata.db.Province;
+import com.azder.weatherupdata.gson.Weather;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,8 +44,8 @@ public class Utility {
                 for (int i = 0; i < allCities.length(); i++) {
                     JSONObject cityObject = allCities.getJSONObject(i);
                     City city = new City();
-                    city.setCityCode(cityObject.getInt("cityCode"));
-                    city.setCityName(cityObject.getString("cityName"));
+                    city.setCityName(cityObject.getString("name"));
+                    city.setCityCode(cityObject.getInt("id"));
                     city.setProvinceId(provinceId);
                     city.save();
                 }
@@ -61,9 +64,10 @@ public class Utility {
                 for (int i = 0; i < allCounties.length(); i++) {
                     JSONObject countyObject = allCounties.getJSONObject(i);
                     County county = new County();
-                    county.setCountyName(countyObject.getString("countyName"));
-                    county.setWeatherId(countyObject.getString("weatherId"));
+                    county.setCountyName(countyObject.getString("name"));
+                    county.setWeatherId(countyObject.getString("weather_id"));
                     county.setCityId(cityId);
+                    county.save();
                 }
                 return true;
             } catch (JSONException e) {
@@ -71,6 +75,18 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    public static Weather handleWeatherResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
